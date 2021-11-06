@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load sorl_thumbnail %}
+
+{% block title %}
+    Image Sharer
+{% endblock %}
+{% block body %}
+    <div class="row">
+        {% if post %}
+            {% for posts in post %}
+            <div class="col-sm-6 col-md-3">
+                <div class="card my-4">
+                    {% thumbnail posts.image "200x220" crop="center" as im %}
+                        <img src="{{ im.url }}" class="card-img-top">
+                    {% endthumbnail %}
+                    <div class="card-body">
+                    <h5 class="card-title">{{posts.text}}</h5>
+                    <a href="{% url 'feed:detail' posts.id %}" class="btn btn-primary">View Full Image</a>
+                    </div>
+                </div>
+            </div>
+                
+            {% endfor %}
+        
+        {% else %}<div class="text-center mt-5"><img src="https://github.com/Roushan-2104/MULTIVERSE-IMAGE-GALLERY/blob/master/images/nopost.png?raw=true" class="img-fluid"></div>
+        {% endif %}
+        
+    </div>
+{% endblock %}
